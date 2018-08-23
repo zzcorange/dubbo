@@ -52,7 +52,7 @@ public class ZookeeperRegistryTest {
     public void setUp() throws Exception {
         int zkServerPort = NetUtils.getAvailablePort();
         this.zkServer = new TestingServer(zkServerPort, true);
-        this.registryUrl = URL.valueOf("zookeeper://localhost:" + zkServerPort);
+        this.registryUrl = URL.valueOf("zookeeper://119.23.74.163:" + "2181");
 
         zookeeperRegistryFactory = new ZookeeperRegistryFactory();
         zookeeperRegistryFactory.setZookeeperTransporter(new CuratorZookeeperTransporter());
@@ -66,8 +66,8 @@ public class ZookeeperRegistryTest {
 
     @Test
     public void testDefaultPort() {
-        Assert.assertEquals("10.20.153.10:2181", ZookeeperRegistry.appendDefaultPort("10.20.153.10:0"));
-        Assert.assertEquals("10.20.153.10:2181", ZookeeperRegistry.appendDefaultPort("10.20.153.10"));
+        Assert.assertEquals("119.23.74.163:2181", ZookeeperRegistry.appendDefaultPort("119.23.74.163:0"));
+        Assert.assertEquals("119.23.74.163:2181", ZookeeperRegistry.appendDefaultPort("119.23.74.163"));
     }
 
     @Test(expected = IllegalStateException.class)
