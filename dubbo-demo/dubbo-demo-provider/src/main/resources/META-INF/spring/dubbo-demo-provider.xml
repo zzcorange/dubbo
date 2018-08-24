@@ -30,10 +30,12 @@
     <!-- use dubbo protocol to export service on port 20880
     <dubbo:protocol name="dubbo" port="20880"/> -->
 
-    <!-- service implementation, as same as regular local bean -->
+    <!-- service implementation, as same as regular local bean
     <bean id="demoService" class="org.apache.dubbo.demo.provider.DemoServiceImpl"/>
+    <bean id="redisService" class="org.apache.dubbo.demo.provider.RedisServiceImpl"/>-->
 
-    <!-- declare the service interface to be exported -->
+    <!-- declare the service interface to be exported
     <dubbo:service interface="org.apache.dubbo.demo.DemoService" ref="demoService"/>
-
+    <dubbo:service interface="org.apache.dubbo.demo.RedisService" ref="redisService"/>-->
+    <dubbo:annotation package="org.apache.dubbo.demo" />
 </beans>

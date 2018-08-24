@@ -17,6 +17,8 @@
 package org.apache.dubbo.demo.consumer;
 
 import org.apache.dubbo.demo.DemoService;
+import org.apache.dubbo.demo.LocalZoopkeeperService;
+import org.apache.dubbo.demo.RedisService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Consumer {
@@ -30,10 +32,14 @@ public class Consumer {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-consumer.xml"});
         context.start();
         DemoService demoService = (DemoService) context.getBean("demoService"); // get remote service proxy
+        RedisService redisService = (RedisService)context.getBean("redisService");
+        LocalZoopkeeperService localZoopkeeperService = (LocalZoopkeeperService)context.getBean("localZoopkeeperService");
         while (true) {
             try {
                 Thread.sleep(1000);
                 String hello = demoService.sayHello("world"); // call remote method
+                System.out.println( redisService.sayHello("jack"));
+                System.out.println( localZoopkeeperService.sayHello("jack"));
                 System.out.println(hello); // get result
             } catch (Throwable throwable) {
                 throwable.printStackTrace();

@@ -26,10 +26,11 @@
     <dubbo:application name="demo-consumer"/>
 
     <!-- use multicast registry center to discover service -->
-    <dubbo:registry address="119.23.74.163:2181" protocol="zookeeper"/>
-
+    <dubbo:registry address="119.23.74.163:2181" protocol="zookeeper" id="ali"/>
+    <dubbo:registry address="127.0.0.1:2181" protocol="zookeeper" id="local"/>
     <!-- generate proxy for the remote service, then demoService can be used in the same way as the
     local regular interface -->
-    <dubbo:reference id="demoService" check="false" interface="org.apache.dubbo.demo.DemoService"/>
-
+    <dubbo:reference id="demoService" check="false" interface="org.apache.dubbo.demo.DemoService" registry="ali" />
+    <dubbo:reference interface="org.apache.dubbo.demo.RedisService" id="redisService" registry="ali" />
+    <dubbo:reference interface="org.apache.dubbo.demo.LocalZoopkeeperService" id="localZoopkeeperService" registry="local" />
 </beans>
